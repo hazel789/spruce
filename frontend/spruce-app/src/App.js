@@ -9,6 +9,8 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import UserProfile from './components/UserProfile';
 import ProductDetails from './components/ProductDetails';
+import Admin from './components/Admin';
+
 
 function App() {
 
@@ -18,20 +20,19 @@ function App() {
 
   const [cartProducts, setCartProducts] = useState([])
   return (
-    <>      
-      <Route exact path='/'>   
+    <>
+      <NavBar setSearchInput={setSearchInput} setFetchingSearch={setFetchingSearch}/>
+      <Route exact path='/'>  
         <LandingPage2 setFetchData={setFetchData} ></LandingPage2>
       </Route>
       <Route>
-        <NavBar setSearchInput={setSearchInput} setFetchingSearch={setFetchingSearch}/>
-        <Route exact path='/products'>
-          <Display searchInput={searchInput} fetchData={fetchData} setFetchData={setFetchData}/>
-        </Route>
+        <Route exact path='/products'><Display searchInput={searchInput} fetchData={fetchData} setFetchData={setFetchData}/></Route>
         <Route exact path='/cart'><Cart cartProducts={cartProducts}  setCartProducts={setCartProducts}/></Route>
         <Route exact path='/signup'><Signup/></Route>
         <Route exact path='/login'><Login/></Route>
         <Route exact path='/user'><UserProfile/></Route>
         <Route exact path='/product/:id'><ProductDetails cartProducts={cartProducts} setCartProducts={setCartProducts} /></Route>
+        <Route exact path='/admin'><Admin /></Route>
 
       </Route>
      

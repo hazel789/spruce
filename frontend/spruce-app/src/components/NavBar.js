@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Navbar } from 'react-bulma-components';
 import { useHistory } from "react-router-dom";
+import logo from "../assets/spruce_logo.jpg";
 
 const NavBar = (props) => {
     const history = useHistory();
@@ -18,13 +20,42 @@ const NavBar = (props) => {
 
     return (
         <>
-            <ul>
-            <li>Spruce</li>
-            <li onClick={handleSignup}>Signup</li>
-            <li onClick={handleLogin}>Login</li>
-            <li onClick={handleCart}>Cart</li>
+            <Navbar>
+            <Navbar.Brand>
+                <Navbar.Item href="/">
+                <img src={logo} height="30px"/>
+                </Navbar.Item>
+                <Navbar.Burger />
+            </Navbar.Brand>
+            <Navbar.Menu>
+                <Navbar.Container align="right">
+                <Navbar.Item href="#">
+                    <Navbar.Link>
+                    Account
+                    </Navbar.Link>
+                    <Navbar.Dropdown>
+                    <Navbar.Item onClick={handleSignup}>
+                        Register
+                    </Navbar.Item>
+                    <Navbar.Item onClick={handleLogin}>
+                        Login
+                    </Navbar.Item>
+                    </Navbar.Dropdown>
+                    </Navbar.Item>
+                    </Navbar.Container>
 
-            </ul>
+                    <Navbar.Divider />
+                    <Navbar.Item href="#">
+                        Search
+                    </Navbar.Item>
+
+                <Navbar.Container align="right">
+                <Navbar.Item onClick={handleCart}>
+                    Cart
+                </Navbar.Item>
+                </Navbar.Container>
+            </Navbar.Menu>
+            </Navbar>
         </>
     )
 }

@@ -4,7 +4,10 @@ import ProductCard from "./ProductCard";
 import ProductDetails from './ProductDetails'
 import { useLocation } from "react-router-dom";
 
-import './display.css';
+import { Form } from 'react-bulma-components';
+
+// import './display.css';
+
 const Display = (props) => {
     const location = useLocation();
 
@@ -45,7 +48,7 @@ const Display = (props) => {
         fetchData(queryURL)
         
     }, [props.fetchData, location])
-    
+
     useEffect(() => {
         let queryURL = 'http://localhost:3000/product/search'
         fetchData(queryURL)

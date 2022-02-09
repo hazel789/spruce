@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import newCollection from "../assets/new_collection.jpeg"
+import './landingpage2.css'
 
 const LandingPage2 = (props) => {
     const history = useHistory();
@@ -20,7 +21,6 @@ const LandingPage2 = (props) => {
     return (
         <header>
             <div className='header'>
-                <h1>Spruce</h1>
                 <h2 className="header-title2" >New Collection</h2>
                 <img src={newCollection} onClick={handleOnClickNew} />
                 <h2 className="header-title3">Featured Items</h2>

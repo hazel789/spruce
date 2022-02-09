@@ -18,6 +18,7 @@ const ProductDetails = (props) => {
 
     const addToCart = (event) => {
         event.preventDefault();
+        console.log(props.cartProducts);
         props.setCartProducts([...props.cartProducts, productDetails]);
     }
     
@@ -35,7 +36,7 @@ const ProductDetails = (props) => {
         <h4>{productDetails?.price}</h4>
         <h4>{productDetails?.description}</h4>
 
-        <button onClick={addToCart}>Add to Cart</button>
+        {!productDetails?.purchase_id ? <button onClick={addToCart}>Add to Cart</button> : <button >Sold out!</button> }
     
         </div>
 

@@ -32,11 +32,29 @@ const UserProfile = (props) => {
         }
     }, [])
 
+    const userPurchasesDisplay = userPurchases.map((purchase) => {
+        return (
+            <div>
+                {purchase.products.map((product)=> {
+                    return (
+                        <div>
+                            {product.name},
+                            {product.price}
+                        </div>
+                    )
+                })}
+                {purchase.total_amount},
+                {purchase.created_at}
+            </div>
+        )
+    })
+
     return (
         <div>
             <h1>{userData?.name}</h1>
             <h1>{userData?.email}</h1>
             <h1>{userData?.address}</h1>
+            {userPurchasesDisplay}
         </div>
     )
 }
