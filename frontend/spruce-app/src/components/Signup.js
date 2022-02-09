@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { useHistory } from "react-router-dom";
-import logo from '../assets/spruce_logo.jpg'
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -60,7 +59,7 @@ const Signup = (props) => {
             }}
           >
             <Typography component="h1" variant="h5">
-              Register
+              Create Account
             </Typography>
             <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
@@ -126,13 +125,13 @@ const Signup = (props) => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 , bgcolor: "orange"}}
+                sx={{ mt: 3, mb: 2 , bgcolor: "#f2bc50", "&:hover": {background: "#ed902d"}}}
               >
                 Register
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link href="/login" variant="body2" sx={{color: "gray"}}>
                     Already have an account? Sign in
                   </Link>
                 </Grid>

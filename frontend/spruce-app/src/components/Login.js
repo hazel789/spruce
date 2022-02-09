@@ -72,7 +72,7 @@ const Login = (props) => {
           }}
         >
           <Typography component="h1" variant="h5">
-            Sign in
+            Log In
           </Typography>
           <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -85,7 +85,7 @@ const Login = (props) => {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+                autoFocus
             />
             <TextField
             onChange={handleInputChange}
@@ -98,27 +98,25 @@ const Login = (props) => {
               type="password"
               id="password"
               autoComplete="current-password"
+             
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox value="remember" color="primary"/>}
               label="Remember me"
             />
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, bgcolor: "orange"}}
+              sx={{ mt: 3, mb: 2, bgcolor: "#f2bc50", "&:hover": {background: "#ed902d"}}}
             >
-              Sign In
+              Log In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href="/signup" variant="body2" sx={{color: "gray"}}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
