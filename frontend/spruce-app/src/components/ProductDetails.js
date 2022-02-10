@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
+import Button from '@mui/material/Button'
 
 const ProductDetails = (props) => {
     const location = useLocation();
@@ -36,7 +37,7 @@ const ProductDetails = (props) => {
         <h4>{productDetails?.price}</h4>
         <h4>{productDetails?.description}</h4>
 
-        {!productDetails?.purchase_id ? <button onClick={addToCart}>Add to Cart</button> : <button >Sold out!</button> }
+        {!productDetails?.purchase_id ? <Button onClick={addToCart}>Add to Cart</Button> : <Button>Sold out!</Button> }
     
         </div>
 

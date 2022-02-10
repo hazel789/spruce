@@ -3,35 +3,19 @@ import { Route, Link} from 'react-router-dom';
 import ProductCard from "./ProductCard";
 import ProductDetails from './ProductDetails'
 import { useLocation } from "react-router-dom";
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid';
 
-import { Form } from 'react-bulma-components';
-
-// import './display.css';
 
 const Display = (props) => {
     const location = useLocation();
-
-    const [productsData, setProductsData] = useState([]);
-
-    const [searchInput, setSearchInput] = useState('');
-
-    const handleOnChange = (event) => {
-        setSearchInput(event.target.value)
-    }
-
-    const handleOnClickSearch = (event) => {
-        event.preventDefault();
-        let queryURL = `http://localhost:3000/product/search?fuzzy=${searchInput}`
-        fetchData(queryURL)
-        }
 
     const fetchData = async (url) => {
         const resp = await fetch(url)
         props.setFetchData({fetchData: false})
         
         const products = await resp.json();
-        console.log(products);
-        setProductsData(products);
+        props.setProductsData(products);
     }
 
     useEffect(() => {
@@ -50,37 +34,31 @@ const Display = (props) => {
     }, [props.fetchData, location])
 
     useEffect(() => {
-        let queryURL = 'http://localhost:3000/product/search'
-        fetchData(queryURL)
-        
+        if (props.fetchData.fetchData) {
+            let queryURL = 'http://localhost:3000/product/search'
+            fetchData(queryURL)
+        }
+
     }, [])
 
-    let display = productsData.map((product) => {
+    let display = props.productsData.map((product) => {
         return (
-            <div className="productcards"  >
-                <Link className="link" to={{
-                        pathname: `/product/${product.id}`
-                        }}>
-                    < ProductCard  product={product}/>
-                </Link>
-
-                
-            </div>
+            <>
+                <ProductCard product={product}/>
+            </>
         )
     })
 
     return (
 
         <>
-            <form>
-            <input value={searchInput} htmlFor="search" placeholder="Search" className="searchBar" onChange={handleOnChange}></input>
-            <input type="submit" id='searchButton' onClick={handleOnClickSearch}></input>
-            </form>
-        
-            <div className="display-results">
+         <Box sx={{bgcolor: "white"}}>
+            <Box sx={{ width: '100%' }}>
+                <Grid wrap='wrap' container direction="row" columns={14} justifyContent="center" alignItems="center" rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 {display}
-            </div>
-
+                </Grid>
+            </Box>
+        </Box>
         </>
 
         )

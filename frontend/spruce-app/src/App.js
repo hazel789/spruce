@@ -14,19 +14,19 @@ import Admin from './components/Admin';
 
 function App() {
 
-  const [searchInput, setSearchInput] = useState('');
-  const [fetchingSearch, setFetchingSearch] = useState(false)
   const [fetchData, setFetchData] = useState({fetchData: true});
+  const [productsData, setProductsData] = useState([]);
+
 
   const [cartProducts, setCartProducts] = useState([])
   return (
     <>
-      <NavBar setSearchInput={setSearchInput} setFetchingSearch={setFetchingSearch}/>
+      <NavBar setProductsData={setProductsData} setFetchData={setFetchData}/>
       <Route exact path='/'>  
         <LandingPage2 setFetchData={setFetchData} ></LandingPage2>
       </Route>
       <Route>
-        <Route exact path='/products'><Display searchInput={searchInput} fetchData={fetchData} setFetchData={setFetchData}/></Route>
+        <Route exact path='/products'><Display productsData={productsData} setProductsData={setProductsData} fetchData={fetchData} setFetchData={setFetchData}/></Route>
         <Route exact path='/cart'><Cart cartProducts={cartProducts}  setCartProducts={setCartProducts}/></Route>
         <Route exact path='/signup'><Signup/></Route>
         <Route exact path='/login'><Login/></Route>

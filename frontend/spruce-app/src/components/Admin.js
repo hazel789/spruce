@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { TextField, Typography } from "@mui/material";
+import { Checkbox } from '@mui/material';
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 
 const Admin = () => {
 
@@ -69,24 +74,31 @@ const Admin = () => {
     }
     const urlLinksDisplay = values.urls.map((link) => {
         return (
-            <p>
+            <Typography fontSize='10' sx={{margin: '10px'}}>
                 {link}
-            </p>
+            </Typography>
         )
     })
     return (
-        <div>
-
-          
-            <input type="file" name="myImage" onChange={onImageChange} />
+        <Box justifyContent="center" alignItems="center" sx={{marginTop: '10px'}}>
+            <Button variant='text'><input type="file" name="myImage" onChange={onImageChange}/></Button>
             <div>{urlLinksDisplay}</div>
             <form>
-                <input type="text" name="name" onChange={handleInputChange} value={values.name} placeholder="name"/> 
-                <input type="text" name="description" onChange={handleInputChange} value={values.description} placeholder="description"/>
-                <input type="text" name="size" onChange={handleInputChange} value={values.size} placeholder="size"/>
-                <input type="text" name="price" onChange={handleInputChange} value={values.price} placeholder="price"/> 
+            <Box justifyContent="center" alignItems="center" >
+                <div>
+                <TextField variant='outlined' name="name" onChange={handleInputChange} value={values.name} label="name" sx={{margin: '8px'}}/> 
+                </div>
+                <div>
+                <TextField variant='outlined' name="description" onChange={handleInputChange} value={values.description} label="description" sx={{margin: '8px'}}/>
+                </div>
+                <div>
+                <TextField variant='outlined' name="size" onChange={handleInputChange} value={values.size} label="size" sx={{margin: '8px'}}/>
+                </div>
+                <div>
+                <TextField variant='outlined' name="price" onChange={handleInputChange} value={values.price} label="price" sx={{margin: '8px'}}/> 
+                </div>
                 <label>
-                    <input
+                    <Checkbox
                         name="is_featured"
                         type="checkbox"
                         value={values.is_featured}
@@ -95,7 +107,7 @@ const Admin = () => {
                     Is featured
                 </label>
                 <label>
-                    <input
+                    <Checkbox
                         name="is_new"
                         type="checkbox"
                         value={values.is_new}
@@ -103,9 +115,12 @@ const Admin = () => {
                         />
                     Is new
                 </label>
-                <input type="submit" onClick={submitForm}/>
+                <div>
+                <Button variant='contained' onClick={submitForm} sx={{margin: '8px'}}>Submit</Button>
+                </div>
+            </Box>
             </form>
-        </div>
+        </Box>
     )
 
 }

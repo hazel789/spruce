@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import Box from '@mui/material/Box'
+import { Typography } from "@mui/material";
+
 const UserProfile = (props) => {
     
     const history = useHistory();
@@ -38,8 +41,8 @@ const UserProfile = (props) => {
                 {purchase.products.map((product)=> {
                     return (
                         <div>
-                            {product.name},
-                            {product.price}
+                            <Typography variant="h6">{product.name}</Typography>,
+                            <Typography variant="h6">{product.price}</Typography>
                         </div>
                     )
                 })}
@@ -50,12 +53,13 @@ const UserProfile = (props) => {
     })
 
     return (
-        <div>
-            <h1>{userData?.name}</h1>
-            <h1>{userData?.email}</h1>
-            <h1>{userData?.address}</h1>
+        <Box sx={{bgcolor: "#f7ede2"}}>
+            <Typography variant="h3">Hello, {userData?.name}</Typography>
+            <Typography variant="h6">Email Address: {userData?.email}</Typography>
+            <Typography variant="h6">{userData?.address}</Typography>
+            <Typography>Purchase History</Typography>
             {userPurchasesDisplay}
-        </div>
+        </Box>
     )
 }
 

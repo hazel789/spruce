@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../assets/spruce_logo2.PNG";
 
 import { styled, alpha } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -14,31 +15,22 @@ import Divider from '@mui/material/Divider';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCartRounded'
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCartRounded';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import TextField from '@mui/material/TextField';
 
-
-// export default function PersistentDrawerLeft() {
-//     const theme = useTheme(); 
-// }
-  
    
 const NavBar = (props) => {
     const history = useHistory();
-    const [open, setOpen] = React.useState(false);
+    const theme = useTheme(); 
+
+    const [open, setOpen] = useState(false);
+    const [searchInput, setSearchInput] = useState('');
 
     const drawerWidth = 240;
-
-    const handleSignup = (event) => {
-        history.push('/signup');
-    }
-
-    const handleLogin = (event) => {
-        history.push('/login');
-    }
-
-    const handleCart = (event) => {
-        history.push('/cart');
-    }
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -92,7 +84,29 @@ const NavBar = (props) => {
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
       }));
+
+    const fetchData = async (url) => {
+      console.log(url);
+      const resp = await fetch(url)
+      props.setFetchData({fetchData: false})
       
+      const products = await resp.json();
+      console.log(products);
+      props.setProductsData(products);
+    }
+
+    const handleOnChange = (event) => {
+      setSearchInput(event.target.value)
+    }
+
+    const handleOnClickSearch = async (event) => {
+      console.log(searchInput);
+      event.preventDefault();
+      let queryURL = `http://localhost:3000/product/search?fuzzy=${searchInput}`
+      await fetchData(queryURL)
+      history.push('/products')
+    }
+
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
@@ -139,37 +153,50 @@ const NavBar = (props) => {
         <>
 
         <Box sx={{ flexGrow: 1, }}>
-      <AppBar position="static" sx={{bgcolor: "#f2bc50", maxHeight:"80px"}}>
+      <AppBar position="static" sx={{boxShadow: 'none', bgcolor: "#f4a261", maxHeight:"68px"}}>
         <Toolbar>
-          <IconButton
+          <IconButton onClick={handleDrawerOpen}
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, color: "#f7ede2"}}
           >
             <MenuIcon />
           </IconButton>
+          <Link to='/'>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <img src={logo} width="25%"></img>
+            <img src={logo} width="28%"></img>
             </Typography>
-          <Search>
+            </Link>
+
+            {/* <TextField id="standard-basic" label="Search" variant="standard" /> */}
+
+            <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <SearchIcon sx={{color: "#f7ede2"}}/>
             </SearchIconWrapper>
+            <form onSubmit={handleOnClickSearch}>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'searchInput' }}
+              value={searchInput}
+              onChange={handleOnChange}
+              name="searchInput"
+              autoFocus="true"
             />
-        </Search>
-        <IconButton color="primary" sx={{color: "white", margin:"10px"}} aria-label="add to shopping cart">
-            <AddShoppingCartIcon onClick={handleCart}/>
-        </IconButton>              
+            </form>
+            </Search>
+        <Link to='/cart'>
+            <IconButton color="primary" sx={{color: "#f7ede2", margin:"10px"}} aria-label="add to shopping cart">
+                <AddShoppingCartIcon/>
+            </IconButton>  
+        </Link>            
         </Toolbar>
       </AppBar>
         </Box>
@@ -187,31 +214,39 @@ const NavBar = (props) => {
         open={open}
       >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          <IconButton sx={{color: "black"}} onClick={handleDrawerClose}>
+          {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
-        <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+            <Link to='/' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
+            <ListItem>
+              <ListItemText>
+                  Home
+              </ListItemText>
             </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+            </Link>
+            <Link to='/login' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
+            <ListItem>
+              <ListItemText>
+                  Log In
+              </ListItemText>
             </ListItem>
-          ))}
+            </Link>
+            <Link to='/signup' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
+            <ListItem>
+              <ListItemText primary="Create Account">
+                  Create Account
+              </ListItemText>
+            </ListItem>
+            </Link>
+            <ListItem>
+            <Link to='/products' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
+              <ListItemText primary="New Collection">
+                Shop
+              </ListItemText>
+              </Link>
+            </ListItem>
         </List>
       </Drawer>
         </>

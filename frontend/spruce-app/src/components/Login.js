@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const Login = (props) => {
     const history = useHistory();
+    let displayMessage;
 
     const [values, setValues] = useState({email: '', password: ''});
 
@@ -44,10 +45,25 @@ const Login = (props) => {
         
         const data = await response.json()
         const result = data.res;
+
         if (result === "wrong_password") {
             console.log("wrong password");
+            displayMessage =
+              <h1>
+                Wrong password!
+              </h1>
         } else if (result === "no_such_user") {
             console.log("no such user!");
+            displayMessage =
+              <Typography variant="h6">
+                User not found.
+              </Typography>
+        } else {
+          console.log("successful");
+          displayMessage =
+            <Typography variant="h6">
+              Log in successful!
+            </Typography>
         }
 
         const refreshToken = data.refreshToken;
@@ -59,6 +75,7 @@ const Login = (props) => {
         localStorage.setItem('customerId', data.customerId);
 
     }
+
     return (
         <>
         <Container component="main" maxWidth="xs">
@@ -74,7 +91,7 @@ const Login = (props) => {
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
-          <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
                 onChange={handleInputChange}
                 value={values.email}
@@ -105,6 +122,7 @@ const Login = (props) => {
               label="Remember me"
             />
             <Button
+              onClick={submitForm}
               type="submit"
               fullWidth
               variant="contained"
@@ -122,8 +140,10 @@ const Login = (props) => {
               </Grid>
             </Grid>
           </Box>
+
         </Box>
       </Container>
+      {displayMessage}
       </>
     )
 }
