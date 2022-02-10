@@ -16,9 +16,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const Login = (props) => {
     const history = useHistory();
-    let displayMessage;
+    const [displayMessage, setDisplayMessage] = useState(<div></div>);
 
     const [values, setValues] = useState({email: '', password: ''});
+
 
     const handleInputChange = (event) => {
         console.log(values);
@@ -45,35 +46,30 @@ const Login = (props) => {
         
         const data = await response.json()
         const result = data.res;
-
+        setDisplayMessage((<div></div>))
         if (result === "wrong_password") {
             console.log("wrong password");
-            displayMessage =
-              <h1>
+            setDisplayMessage((
+              <Typography sx={{margin: 'auto'}} variant="caption" color="red">
                 Wrong password!
-              </h1>
+              </Typography>))
         } else if (result === "no_such_user") {
             console.log("no such user!");
-            displayMessage =
-              <Typography variant="h6">
-                User not found.
-              </Typography>
+            setDisplayMessage(
+              <Typography sx={{margin: 'auto'}} variant="caption" color="red">
+                User not found
+              </Typography>)
         } else {
+          const refreshToken = data.refreshToken;
+          const accessToken = data.accessToken;
+
+          const myStorage = window.localStorage;
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
+          localStorage.setItem('customerId', data.customerId);
           console.log("successful");
-          displayMessage =
-            <Typography variant="h6">
-              Log in successful!
-            </Typography>
+          history.push('/')
         }
-
-        const refreshToken = data.refreshToken;
-        const accessToken = data.accessToken;
-
-        const myStorage = window.localStorage;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
-        localStorage.setItem('customerId', data.customerId);
-
     }
 
     return (
@@ -117,6 +113,9 @@ const Login = (props) => {
               autoComplete="current-password"
              
             />
+            <div>
+            {displayMessage}
+            </div>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary"/>}
               label="Remember me"
@@ -140,10 +139,9 @@ const Login = (props) => {
               </Grid>
             </Grid>
           </Box>
-
         </Box>
       </Container>
-      {displayMessage}
+
       </>
     )
 }

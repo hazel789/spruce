@@ -20,7 +20,11 @@ const ProductDetails = (props) => {
     const addToCart = (event) => {
         event.preventDefault();
         console.log(props.cartProducts);
-        props.setCartProducts([...props.cartProducts, productDetails]);
+        
+        const productInCart = props.cartProducts.find((product) => product.id === productDetails.id)
+        if (!productInCart) {
+            props.setCartProducts([...props.cartProducts, productDetails]);
+        }
     }
     
     return (

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Box from '@mui/material/Box'
 import { Typography } from "@mui/material";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 const UserProfile = (props) => {
     
@@ -53,11 +56,12 @@ const UserProfile = (props) => {
     })
 
     return (
-        <Box sx={{bgcolor: "#f7ede2"}}>
-            <Typography variant="h3">Hello, {userData?.name}</Typography>
-            <Typography variant="h6">Email Address: {userData?.email}</Typography>
-            <Typography variant="h6">{userData?.address}</Typography>
-            <Typography>Purchase History</Typography>
+        <Box>
+            <Avatar sx={{ bgcolor: deepOrange[500], margin: '10px'}}></Avatar>
+            <Typography sx={{margin: '10px'}} variant="h5"><b>Hello, {userData?.name}</b></Typography>
+            <Typography sx={{margin: '10px'}} variant="body2"><b>Email Address:</b> {userData?.email}</Typography>
+            <Typography sx={{margin: '10px'}} variant="body2"><b>Address: </b> {userData?.address}</Typography>
+            <Typography sx={{marginLeft: '10px', marginTop: '20px'}} variant='body1'><b>Purchase History</b></Typography>
             {userPurchasesDisplay}
         </Box>
     )

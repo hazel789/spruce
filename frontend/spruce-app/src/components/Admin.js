@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useHistory} from 'react-router-dom';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { TextField, Typography } from "@mui/material";
 import { Checkbox } from '@mui/material';
@@ -7,6 +8,9 @@ import Button from '@mui/material/Button'
 
 const Admin = () => {
 
+    const history= useHistory();
+
+    const [displayMessage, setDisplayMessage] = useState(<div></div>)
     const [values, setValues] = useState({name: '', description: '', price: 0, size: '', is_featured: false, is_new:false, urls: []});
 
     const handleInputChange = (event) => {
@@ -67,20 +71,24 @@ const Admin = () => {
         })
         const res = await response.json()
         if (res.status === 200) {
-            // TODO: make success story
+            history.push('/products')
         } else {
-            // TODO: make failure story
+            displayMessage = 
+                <Typography variant='h6'>
+                    Try again
+                </Typography>
         }
     }
     const urlLinksDisplay = values.urls.map((link) => {
         return (
-            <Typography fontSize='10' sx={{margin: '10px'}}>
+            <Typography variant='subtitle2' sx={{margin: '10px'}}>
                 {link}
             </Typography>
         )
     })
     return (
         <Box justifyContent="center" alignItems="center" sx={{marginTop: '10px'}}>
+            <Typography variant='h4' sx={{margin: '10px'}}>Welcome Admin!</Typography>
             <Button variant='text'><input type="file" name="myImage" onChange={onImageChange}/></Button>
             <div>{urlLinksDisplay}</div>
             <form>
@@ -120,6 +128,7 @@ const Admin = () => {
                 </div>
             </Box>
             </form>
+            {displayMessage}
         </Box>
     )
 

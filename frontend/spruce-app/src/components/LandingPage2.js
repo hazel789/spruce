@@ -4,6 +4,8 @@ import newCollection from "../assets/new_collection.jpeg"
 import landingImg from "../assets/landingpg_image.jpg";
 import { scroller } from "react-scroll";
 import logo from "../assets/spruce_logo2.PNG";
+import pic1 from '../assets/pic1.JPG';
+import pic2 from '../assets/pic2.JPG'
 
 import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
@@ -11,6 +13,10 @@ import { Button } from '@mui/material';
 import Paper from '@mui/material/Paper'
 import { shadows } from '@mui/system';
 import Typography from '@mui/material/Typography';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+
 
 const LandingPage2 = (props) => {
     const history = useHistory();
@@ -37,7 +43,7 @@ const LandingPage2 = (props) => {
 
     return (
         <>
-        <Paper sx={{bgcolor: "#f7ede2"}}>
+        <Paper>
 
             <Box sx={{width:'100%'}}>
             <Typography sx={{position: "absolute", marginTop: "10%", marginLeft:"23%"}}>
@@ -57,11 +63,31 @@ const LandingPage2 = (props) => {
             <img src={landingImg} width="100%" marginLeft="auto" marginRight="auto"></img>
             </Box>
 
-            <Box className="new-collection">New Collection
+            <ImageList sx={{ width: '100%' }}>
+            <ImageListItem className="new-collection" onClick={handleOnClickNew} sx={{cursor:'pointer'}}>
+            <img src={pic1} loading="lazy"/>
+            <ImageListItemBar
+                title='New Collection'
+                subtitle={<span>| Get first dibs</span>}
+                position="below"
+            />
+            </ImageListItem>
+
+            <ImageListItem onClick={handleOnClickFeatured} sx={{cursor:'pointer'}}>
+            <img src={pic2} loading="lazy"/>
+            <ImageListItemBar
+                title='Featured Items'
+                subtitle={<span>| Our editor's picks</span>}
+                position="below"
+            />
+            </ImageListItem>
+            </ImageList>
+
+            {/* <Box className="new-collection">New Collection
                 <img src={newCollection} onClick={handleOnClickNew} />
             </Box>
                 <h2 className="header-title3">Featured Items</h2>
-                <img src={newCollection} onClick={handleOnClickFeatured} />
+                <img src={newCollection} onClick={handleOnClickFeatured} /> */}
             </Paper>
         </>
     )

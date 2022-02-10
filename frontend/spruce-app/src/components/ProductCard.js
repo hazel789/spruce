@@ -19,7 +19,8 @@ const ProductCard = (props) => {
                      }}>
             <Card variant='outlined' sx={{justifyContent: 'center', margin: '5px', maxWidth:'345'}}>
                 <img src={props.product.images[0].url} width="100%"/>
-                <Typography textAlign="center" fontSize='10' color="text.secondary">{props.product.name}</Typography> 
+                <Typography textAlign="center" variant='body2' color="text.secondary"><b>{props.product.name}</b></Typography> 
+                <Typography textAlign="center" variant='body2' color="text.secondary">${props.product.price}</Typography> 
                 <Typography>
                 {props.product.purchase_id? <Chip label="Sold Out" sx={{margin: '3px'}}/> : <Chip label="Add to Cart" variant="outlined"/>}
                 </Typography>
