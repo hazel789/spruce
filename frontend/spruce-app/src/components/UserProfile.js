@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Box from '@mui/material/Box'
-import { Typography } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { deepOrange, deepPurple } from '@mui/material/colors';
@@ -39,31 +39,54 @@ const UserProfile = (props) => {
     }, [])
 
     const userPurchasesDisplay = userPurchases.map((purchase) => {
+        console.log(purchase)
         return (
+            <>
+            <Grid wrap='nowrap' margin='20px' width='200p'>
+            <Typography><b>Date of purchase:</b> {purchase.created_at}</Typography>
+            <div>
+            <Typography><b>Total amount purchased:</b> S${purchase.total_amount}</Typography>
+            </div>
+            </Grid>
             <div>
                 {purchase.products.map((product)=> {
                     return (
-                        <div>
-                            <Typography variant="h6">{product.name}</Typography>,
-                            <Typography variant="h6">{product.price}</Typography>
-                        </div>
+                        <Grid container marginLeft='40px' marginBottom='10px'>
+                            <Typography variant="body2">{product.name}</Typography>
+                            <Typography marginLeft='20px' variant="body2">S${product.price}</Typography>
+                        </Grid>
                     )
                 })}
-                {purchase.total_amount},
-                {purchase.created_at}
+
             </div>
+            </>
         )
     })
 
     return (
-        <Box>
+        <Grid margin='20px'>
             <Avatar sx={{ bgcolor: deepOrange[500], margin: '10px'}}></Avatar>
             <Typography sx={{margin: '10px'}} variant="h5"><b>Hello, {userData?.name}</b></Typography>
             <Typography sx={{margin: '10px'}} variant="body2"><b>Email Address:</b> {userData?.email}</Typography>
             <Typography sx={{margin: '10px'}} variant="body2"><b>Address: </b> {userData?.address}</Typography>
-            <Typography sx={{marginLeft: '10px', marginTop: '20px'}} variant='body1'><b>Purchase History</b></Typography>
+            <Typography sx={{marginLeft: '10px', marginTop: '40px'}} variant='body1'><b>Purchase History</b></Typography>
+            <Grid sx={{
+                boxShadow: 3,
+                width: '90%',
+                // height: '5rem',
+                bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+                color: (theme) =>
+                    theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800',
+                p: 2,
+                m: 1,
+                borderRadius: 2,
+                textAlign: 'left',
+                fontSize: '0.875rem',
+                fontWeight: '700',
+            }}>
             {userPurchasesDisplay}
-        </Box>
+            </Grid>
+        </Grid>
     )
 }
 

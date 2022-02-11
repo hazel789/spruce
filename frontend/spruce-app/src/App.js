@@ -16,9 +16,8 @@ function App() {
 
   const [fetchData, setFetchData] = useState({fetchData: true});
   const [productsData, setProductsData] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]);
 
-
-  const [cartProducts, setCartProducts] = useState([])
   return (
     <>
       <NavBar setProductsData={setProductsData} setFetchData={setFetchData}/>

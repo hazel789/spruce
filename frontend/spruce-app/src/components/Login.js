@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useHistory } from "react-router-dom";
+import { browserHistory } from "react-router";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,6 +17,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const Login = (props) => {
     const history = useHistory();
+    // const browserHistory = ReactRouter.browserHistory;
+
     const [displayMessage, setDisplayMessage] = useState(<div></div>);
 
     const [values, setValues] = useState({email: '', password: ''});
@@ -68,7 +71,7 @@ const Login = (props) => {
           localStorage.setItem('refreshToken', refreshToken);
           localStorage.setItem('customerId', data.customerId);
           console.log("successful");
-          history.push('/')
+          history.push('/products');
         }
     }
 

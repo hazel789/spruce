@@ -70,14 +70,11 @@ const Admin = () => {
             body: JSON.stringify(values)
         })
         const res = await response.json()
-        if (res.status === 200) {
-            history.push('/products')
-        } else {
-            displayMessage = 
-                <Typography variant='h6'>
-                    Try again
-                </Typography>
-        }
+        setDisplayMessage(
+               <Typography margin='15px' variant='body2'>
+                   Uploaded
+               </Typography>
+        )
     }
     const urlLinksDisplay = values.urls.map((link) => {
         return (
@@ -87,8 +84,8 @@ const Admin = () => {
         )
     })
     return (
-        <Box justifyContent="center" alignItems="center" sx={{marginTop: '10px'}}>
-            <Typography variant='h4' sx={{margin: '10px'}}>Welcome Admin!</Typography>
+        <Box justifyContent="center" alignItems="center" sx={{margin: '15px'}}>
+            <Typography variant='h4' sx={{marginBottom: '20px'}}>Welcome Admin!</Typography>
             <Button variant='text'><input type="file" name="myImage" onChange={onImageChange}/></Button>
             <div>{urlLinksDisplay}</div>
             <form>

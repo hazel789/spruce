@@ -5,6 +5,8 @@ import ProductDetails from './ProductDetails'
 import { useLocation } from "react-router-dom";
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid';
+import Badge from '@mui/material/Badge';
+import { Typography } from "@mui/material"
 
 
 const Display = (props) => {
@@ -41,6 +43,12 @@ const Display = (props) => {
 
     }, [])
 
+    let counterDisplay = 0;
+    for (const product of props.productsData) {
+        counterDisplay+=1
+    }
+    
+
     let display = props.productsData.map((product) => {
         return (
             <>
@@ -53,6 +61,9 @@ const Display = (props) => {
 
         <>
          <Box sx={{bgcolor: "white"}}>
+            <Grid container justifyContent='center' sx={{margin: '10px'}}>
+                <Typography variant='body2' fontWeight={100}>{counterDisplay} products</Typography>
+            </Grid>
             <Box sx={{ width: '100%' }}>
                 <Grid wrap='wrap' container direction="row" columns={14} justifyContent="center" alignItems="center" rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 {display}

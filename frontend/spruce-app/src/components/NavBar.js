@@ -246,7 +246,7 @@ const NavBar = (props) => {
       <List>
           <Link to='/' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
           <ListItem>
-            <ListItemText>
+            <ListItemText primaryTypographyProps={{fontSize:'15px'}}>
                 Home
             </ListItemText>
           </ListItem>
@@ -256,14 +256,14 @@ const NavBar = (props) => {
           <>
           <Link to='/login' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
           <ListItem>
-            <ListItemText>
+            <ListItemText primaryTypographyProps={{fontSize:'15px'}}>
                 Log In
             </ListItemText>
           </ListItem>
           </Link>
           <Link to='/signup' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
           <ListItem>
-            <ListItemText primary="Create Account">
+            <ListItemText primaryTypographyProps={{fontSize:'15px'}}>
                 Create Account
             </ListItemText>
           </ListItem>
@@ -271,7 +271,7 @@ const NavBar = (props) => {
           </> : 
           <Link to='/user' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
           <ListItem>
-            <ListItemText primary="Account">
+            <ListItemText primaryTypographyProps={{fontSize:'15px'}}>
                 Account
             </ListItemText>
           </ListItem>
@@ -279,7 +279,7 @@ const NavBar = (props) => {
           }
           <ListItem>
           <Link to='/products' style={{textDecoration:'none'}} onClick={handleDrawerClose}>
-            <ListItemText primary="Shop Now">
+            <ListItemText primaryTypographyProps={{fontSize:'15px'}}>
               Shop
             </ListItemText>
             </Link>
