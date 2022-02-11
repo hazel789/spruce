@@ -9,7 +9,7 @@ const Cart = (props) => {
     const history = useHistory();
     const [qrCode, setQrCode] = useState();
     const [totalAmount, setTotalAmount] = useState(0);
-    const [accessToken, setAccesssToken] = useState(null);
+    const [accessToken, setAccessToken] = useState(null);
 
     const products = props.cartProducts?.map((product) => {
 
@@ -33,7 +33,7 @@ const Cart = (props) => {
     useEffect(async () => {
         const localStorage = window.localStorage;
         const accessToken = localStorage.getItem('accessToken');
-        // check is user is logged in 
+        // check if user is logged in 
         const res = await fetch('http://localhost:3000/checklogin',{
             headers: {
                 'authorization': `Bearer ${accessToken}`
@@ -42,7 +42,7 @@ const Cart = (props) => {
         if (res.status === 401 || res.status === 403) {
             localStorage.removeItem('accessToken');
         } else {
-            setAccesssToken(accessToken);
+            setAccessToken(accessToken);
         }
     }
        

@@ -34,7 +34,13 @@ const UserProfile = (props) => {
                 'authorization': `Bearer ${accessToken}`
                 }
             });
-            setUserPurchases(await purchaseRes.json());
+
+            const purchases = await purchaseRes.json();
+
+            for (let purchase of purchases) {
+                purchase.created_at = purchase.created_at.substr(0, 10)
+            }
+            setUserPurchases(purchases);
         }
     }, [])
 
