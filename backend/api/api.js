@@ -103,7 +103,7 @@ router.post('/login', async (req, res) => {
 		res.status(200).json({res: "wrong_password"});
 		return;		
 	}
-})
+}) 
 
 router.get('/checklogin', async (req, res) => {
 	const authHeader = req.headers.authorization;

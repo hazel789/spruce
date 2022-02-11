@@ -35,7 +35,7 @@ const db = {
     },
     updateProductWithPurchaseId: async (purchase_id, product_id) => {
         await pool.query('UPDATE product SET purchase_id = ($1) WHERE id = ($2)', [purchase_id, product_id])
-    },
+    }, 
     //============================================ PRODUCT ================================================//
     getProduct: async (id) => {
         const result = await pool.query('SELECT * FROM product WHERE product.id = ($1)', [id])

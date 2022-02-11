@@ -42,7 +42,14 @@ const Signup = (props) => {
               },
             body: JSON.stringify(values)
         })
-        console.log(await response.json());
+        const data = await response.json()
+        const refreshToken = data.refreshToken;
+          const accessToken = data.accessToken;
+
+          const myStorage = window.localStorage;
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
+          localStorage.setItem('customerId', data.customerId);
         history.push('/');
     }
     return (

@@ -26,7 +26,7 @@ const Cart = (props) => {
                 <Grid container justifyContent='right' marginRight="80px" marginBottom='20px'>
                     <Button sx={{color: 'orange', '&:hover': {backgroundColor: 'rgba(244, 162, 97, 0.1)'}}} onClick={removeItem}>Remove Item</Button>
                 </Grid>
-            </Grid>
+            </Grid> 
         )
     })
 

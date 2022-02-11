@@ -6,7 +6,7 @@ import { Checkbox } from '@mui/material';
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
-const Admin = () => {
+const Admin = () => { 
 
     const history= useHistory();
 
@@ -35,9 +35,8 @@ const Admin = () => {
     }
     
     const onImageChange = async (event) => {
-        let formData = new FormData();
+        //let formData = new FormData();
         console.log(event.target.files);
-        // formData.append('myFile', event.target.files[0]);
         const url = 'https://api.imgur.com/3/image'
         const response = await fetch(url, {
             method: 'POST',
